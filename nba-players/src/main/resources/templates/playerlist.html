@@ -11,9 +11,9 @@
             <input type="submit" value="Log Out" class="btn btn-sm btn-danger" style="margin-right: 15px;"/>
         </form>
     </div>
-    <h1 style="margin-left: 15px;">NBA-Playerlist</h1>
+    <h1 style="margin-left: 15px; margin-top: 30px; margin-bottom: 30px; color: #c81e0f; font-weight: bold; border-bottom: 3px solid #c81e0f; padding-bottom: 10px; display: inline-block;">NBA-Playerlist</h1>
     <div>
-        <h2 style="margin-left: 15px;">Hello <span sec:authentication="name"></span>!</h2>
+        <h2 style="margin-left: 15px; margin-bottom: 20px; color: #180cb3;">Hello <span sec:authentication="name"></span>!</h2>
     </div>
     <table class="table table-striped">
         <thead>
@@ -22,8 +22,8 @@
                 <th>Team</th>
                 <th>Number</th>
                 <th>Country</th>
-                <th>Height</th>
-                <th>Weight</th>
+                <th>Height (cm)</th>
+                <th>Weight (kg)</th>
                 <th>Age</th>
                 <th>Position</th>
                 <th>Points</th>
@@ -38,9 +38,8 @@
                 <td th:text="${player.height}"></td>
                 <td th:text="${player.weight}"></td>
                 <td th:text="${player.age}"></td>
-                <td th:text="${player.position}"></td>
+                <td th:text="${player.position?.name}">No Position</td>
                 <td th:text="${player.points}"></td>
-                <td th:text="${player.category?.name}">No Category</td>
                 <td>
                     <span sec:authorize="hasAuthority('ADMIN')">
                         <a class="btn btn-danger" th:href="@{/delete/{id}(id=${player.id})}">Delete</a>
@@ -48,10 +47,10 @@
                     </span>
                 </td>
             </tr>
-            <p>
-                <a href="/addplayer" class="btn btn-success" style="margin-left: 15px;">Add New Player</a>
-            </p>
         </tbody>
     </table>
+    <p>
+        <a href="/addplayer" class="btn btn-success" style="margin-left: 15px;">Add New Player</a>
+    </p>
 </body>
 </html>
