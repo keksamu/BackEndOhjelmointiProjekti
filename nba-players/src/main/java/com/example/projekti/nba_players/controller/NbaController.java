@@ -1,9 +1,10 @@
 package com.example.projekti.nba_players.controller;
 
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,7 +12,7 @@ import com.example.projekti.nba_players.model.Player;
 import com.example.projekti.nba_players.model.PlayerRepository;
 import com.example.projekti.nba_players.model.PositionRepository;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -49,14 +50,14 @@ public class NbaController {
         return "redirect:/playerlist";
     }
 
-    /*@PreAuthorize("hasAuthority('ADMIN')")*/
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/delete/{id}")
     public String deletePlayer(@PathVariable("id") Long playerId) {
         playerRepository.deleteById(playerId);
-        return "redirect:../playerlist";
+        return "redirect:/playerlist";
     }
 
-   /* @PreAuthorize("hasAuthority('ADMIN')") */
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/edit/{id}")
     public String editPlayer(@PathVariable("id") Long playerId, Model model) {
         Player player = playerRepository.findById(playerId).orElse(null);

@@ -41,10 +41,10 @@
                 <td th:text="${player.position?.name}">No Position</td>
                 <td th:text="${player.points}"></td>
                 <td>
-                    <!--<span sec:authorize="hasAuthority('ADMIN')"> -->
+                    <span sec:authorize="hasAuthority('ADMIN')">
                         <a class="btn btn-danger" th:href="@{/delete/{id}(id=${player.id})}" onclick="return confirm('Are you sure you want to delete this player?')">Delete</a>
                         <a class="btn btn-primary" th:href="@{/edit/{id}(id=${player.id})}">Edit</a>
-                    <!--</span>-->
+                    </span>
                 </td>
             </tr>
         </tbody>
