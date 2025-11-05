@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Player</title>
+    <title>Edit Player</title>
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
     <div class="container" style="margin-top: 30px;">
-        <h1>Add New Player</h1>
-        <form th:action="@{/addplayer}" th:object="${player}" method="post">
+        <h1>Edit Player</h1>
+        <form th:action="@{/edit/{id}(id=${player.id})}" th:object="${player}" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" th:field="*{name}" class="form-control" required />
@@ -51,7 +51,7 @@
                 <input type="number" id="points" th:field="*{points}" class="form-control" required />
             </div>
             <div style="margin-top: 20px;">
-                <button type="submit" class="btn btn-success">Add</button>
+                <button type="submit" class="btn btn-success">Save</button>
                 <a href="/playerlist" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
