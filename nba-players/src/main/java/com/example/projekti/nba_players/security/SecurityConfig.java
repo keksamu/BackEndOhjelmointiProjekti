@@ -29,6 +29,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/css/**").permitAll()
                 .anyRequest().authenticated()
@@ -42,7 +43,7 @@ public class SecurityConfig {
                 .permitAll()
             )
             .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/h2-console/**"))
+                .ignoringRequestMatchers("/api/**", "/h2-console/**"))
             .headers(headers -> headers
                 .frameOptions(frameOptions -> frameOptions.sameOrigin()));
         return http.build();
