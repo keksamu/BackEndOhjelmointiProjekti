@@ -8,7 +8,7 @@ Sovellukseen voi listata NBA koripallo pelaajia. Sovelluksessa onnistuu myös se
 
 ## Tietokanta
 - H2
-- MySql
+- PostGreSql
 
 ## Pilvipalvelu
 - Rahti
