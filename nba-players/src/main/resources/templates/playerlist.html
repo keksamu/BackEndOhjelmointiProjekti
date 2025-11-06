@@ -18,6 +18,14 @@
     <div>
         <h2 style="margin-left: 15px; margin-bottom: 20px; color: #180cb3;">Hello <span sec:authentication="name"></span>!</h2>
     </div>
+    <div style="margin: 15px;">
+        <strong>Sort by:</strong>
+        <a href="/playerlist?sort=name" class="btn btn-sm btn-outline-primary">Name</a>
+        <a href="/playerlist?sort=team" class="btn btn-sm btn-outline-primary">Team</a>
+        <a href="/playerlist?sort=age" class="btn btn-sm btn-outline-primary">Age</a>
+        <a href="/playerlist?sort=points" class="btn btn-sm btn-outline-primary">Points</a>
+        <a href="/playerlist" class="btn btn-sm btn-outline-secondary">Reset</a>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>

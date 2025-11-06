@@ -12,7 +12,9 @@ import com.example.projekti.nba_players.model.Player;
 import com.example.projekti.nba_players.model.PlayerRepository;
 import com.example.projekti.nba_players.model.PositionRepository;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 
 
 @Controller
@@ -32,8 +34,22 @@ public class NbaController {
     }
 
     @GetMapping("/playerlist")
-    public String playerList(Model model) {
-        model.addAttribute("players", playerRepository.findAll());
+    public String playerList(@RequestParam(required = false) String sort, Model model) {
+        List<Player> players;
+        
+        if ("name".equals(sort)) {
+            players = playerRepository.findAllByOrderByNameAsc();
+        } else if ("points".equals(sort)) {
+            players = playerRepository.findAllByOrderByPointsDesc();
+        } else if ("team".equals(sort)) {
+            players = playerRepository.findAllByOrderByTeamAsc();
+        } else if ("age".equals(sort)) {
+            players = playerRepository.findAllByOrderByAgeAsc();
+        } else {
+            players = (List<Player>) playerRepository.findAll();
+        }
+        
+        model.addAttribute("players", players);
         return "playerlist";
     }
 
