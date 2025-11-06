@@ -8,6 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Player {
@@ -16,18 +20,40 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
     private String name;
+
+    @NotEmpty(message = "Team is required")
     private String team;
+
+    @NotNull(message = "Number is required")
+    @Min(value = 0, message = "Number must be 0 or greater")
     private int number;
+
+    @NotEmpty(message = "Country is required")
     private String country;
+
+    @NotNull(message = "Height is required")
+    @Min(value = 100, message = "Height must be at least 100 cm")
     private int height;
+
+    @NotNull(message = "Weight is required")
+    @Min(value = 40, message = "Weight must be at least 40 kg")
     private int weight;
+
+    @NotNull(message = "Age is required")
+    @Min(value = 16, message = "Age must be at least 16")
     private int age;
+
+    @NotNull(message = "Points is required")
+    @Min(value = 0, message = "Points cannot be negative")
     private int points;
 
     @ManyToOne
     @JoinColumn(name = "position_id")
     @JsonIgnoreProperties("players")
+    @NotNull(message = "Position is required")
     private Position position;
 
     public Player() {

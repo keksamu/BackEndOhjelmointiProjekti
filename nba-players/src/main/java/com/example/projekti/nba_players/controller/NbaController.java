@@ -1,21 +1,22 @@
 package com.example.projekti.nba_players.controller;
 
-
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.projekti.nba_players.model.Player;
 import com.example.projekti.nba_players.model.PlayerRepository;
 import com.example.projekti.nba_players.model.PositionRepository;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
 
 @Controller
 public class NbaController {
@@ -62,7 +63,11 @@ public class NbaController {
     }
 
     @PostMapping("/addplayer")
-    public String savePlayer(Player player) {
+    public String savePlayer(@Valid Player player, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("positions", positionRepository.findAll());
+            return "addplayer";
+        }
         playerRepository.save(player);
         return "redirect:/playerlist";
     }
@@ -84,12 +89,13 @@ public class NbaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updatePlayer(@PathVariable("id") Long id, Player updatedPlayer) {
+    public String updatePlayer(@PathVariable("id") Long id, @Valid Player updatedPlayer, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("positions", positionRepository.findAll());
+            return "editplayer";
+        }
         updatedPlayer.setId(id);
         playerRepository.save(updatedPlayer);
         return "redirect:/playerlist";
     }
-
-    
-    
 }

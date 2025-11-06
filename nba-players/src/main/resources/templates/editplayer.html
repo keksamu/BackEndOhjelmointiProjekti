@@ -11,44 +11,53 @@
         <form th:action="@{/edit/{id}(id=${player.id})}" th:object="${player}" method="post">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" th:field="*{name}" class="form-control" required />
+                <input type="text" id="name" th:field="*{name}" class="form-control" />
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="team">Team</label>
-                <input type="text" id="team" th:field="*{team}" class="form-control" required />
+                <input type="text" id="team" th:field="*{team}" class="form-control" />
+                <div th:if="${#fields.hasErrors('team')}" th:errors="*{team}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="number">Number</label>
-                <input type="number" id="number" th:field="*{number}" class="form-control" required />
+                <input type="number" id="number" th:field="*{number}" class="form-control" />
+                <div th:if="${#fields.hasErrors('number')}" th:errors="*{number}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="country">Country</label>
-                <input type="text" id="country" th:field="*{country}" class="form-control" required />
+                <input type="text" id="country" th:field="*{country}" class="form-control" />
+                <div th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="height">Height (cm)</label>
-                <input type="number" id="height" th:field="*{height}" class="form-control" required />
+                <input type="number" id="height" th:field="*{height}" class="form-control" />
+                <div th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="weight">Weight (kg)</label>
-                <input type="number" id="weight" th:field="*{weight}" class="form-control" required />
+                <input type="number" id="weight" th:field="*{weight}" class="form-control" />
+                <div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="number" id="age" th:field="*{age}" class="form-control" required />
+                <input type="number" id="age" th:field="*{age}" class="form-control" />
+                <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="position">Position</label>
-                <select id="position" th:field="*{position}" class="form-control" required>
+                <select id="position" th:field="*{position}" class="form-control">
                     <option value="">Select Position</option>
                     <option th:each="position : ${positions}" 
                             th:value="${position.id}" 
                             th:text="${position.name}"></option>
                 </select>
+                <div th:if="${#fields.hasErrors('position')}" th:errors="*{position}" class="text-danger"></div>
             </div>
             <div class="form-group">
                 <label for="points">Points</label>
-                <input type="number" id="points" th:field="*{points}" class="form-control" required />
+                <input type="number" id="points" th:field="*{points}" class="form-control" />
+                <div th:if="${#fields.hasErrors('points')}" th:errors="*{points}" class="text-danger"></div>
             </div>
             <div style="margin-top: 20px;">
                 <button type="submit" class="btn btn-success">Save</button>
