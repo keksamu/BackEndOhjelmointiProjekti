@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+
+
 @RestController
 public class NbaRestController {
 
@@ -43,6 +45,13 @@ public class NbaRestController {
     public void deletePlayer(@PathVariable("id") Long playerId) {
         playerRepository.deleteById(playerId);
 }
+
+    @RequestMapping(value="/api/players/{id}", method=RequestMethod.PUT)
+    public @ResponseBody Player updatePlayer(@PathVariable("id") Long playerId, @RequestBody Player updatedPlayer) {
+        updatedPlayer.setId(playerId);
+        return playerRepository.save(updatedPlayer);
+    }
+    
     
 
 }

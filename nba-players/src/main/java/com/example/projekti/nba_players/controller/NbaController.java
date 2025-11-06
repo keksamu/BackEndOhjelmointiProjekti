@@ -37,6 +37,7 @@ public class NbaController {
         return "playerlist";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/addplayer")
     public String addPlayerForm(Model model) {
         model.addAttribute("player", new Player());

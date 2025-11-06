@@ -11,7 +11,10 @@
             <input type="submit" value="Log Out" class="btn btn-sm btn-danger" style="margin-right: 15px;"/>
         </form>
     </div>
-    <h1 style="margin-left: 15px; margin-top: 30px; margin-bottom: 30px; color: #c81e0f; font-weight: bold; border-bottom: 3px solid #c81e0f; padding-bottom: 10px; display: inline-block;">NBA-Playerlist</h1>
+    <h1 style="margin-left: 15px; margin-top: 30px; 
+    margin-bottom: 30px; color: #c81e0f; font-weight: bold; 
+    border-bottom: 3px solid #c81e0f; padding-bottom: 10px; 
+    display: inline-block;">NBA-Playerlist</h1>
     <div>
         <h2 style="margin-left: 15px; margin-bottom: 20px; color: #180cb3;">Hello <span sec:authentication="name"></span>!</h2>
     </div>
@@ -49,8 +52,10 @@
             </tr>
         </tbody>
     </table>
-    <p>
-        <a href="/addplayer" class="btn btn-success" style="margin-left: 15px;">Add New Player</a>
-    </p>
+        <span sec:authorize="hasAuthority('ADMIN')">
+            <p>
+                <a href="/addplayer" class="btn btn-success" style="margin-left: 15px;">Add New Player</a>
+            </p>
+        </span>
 </body>
 </html>

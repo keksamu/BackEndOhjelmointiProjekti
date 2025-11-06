@@ -9,12 +9,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private UserDetailsService userDetailsService; 
+    private final UserDetailsService userDetailsService; 
 
     public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -29,9 +30,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/css/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/players/**").authenticated()  // Anyone can view
+                .requestMatchers(HttpMethod.POST, "/api/players/**").hasAuthority("ADMIN")  // Only admin can create
+                .requestMatchers(HttpMethod.PUT, "/api/players/**").hasAuthority("ADMIN")  // Only admin can update
+                .requestMatchers(HttpMethod.DELETE, "/api/players/**").hasAuthority("ADMIN")  // Only admin can delete
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
@@ -42,6 +46,7 @@ public class SecurityConfig {
             .logout(logout -> logout
                 .permitAll()
             )
+            .httpBasic(basic -> {})
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/api/**", "/h2-console/**"))
             .headers(headers -> headers
