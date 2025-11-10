@@ -32,10 +32,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/css/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/players/**").authenticated()  // Anyone can view
-                .requestMatchers(HttpMethod.POST, "/api/players/**").hasAuthority("ADMIN")  // Only admin can create
-                .requestMatchers(HttpMethod.PUT, "/api/players/**").hasAuthority("ADMIN")  // Only admin can update
-                .requestMatchers(HttpMethod.DELETE, "/api/players/**").hasAuthority("ADMIN")  // Only admin can delete
+                .requestMatchers("/register").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/players/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "/api/players/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/api/players/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/api/players/**").hasAuthority("ADMIN") 
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
