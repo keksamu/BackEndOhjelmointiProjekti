@@ -33,13 +33,11 @@ public class RegistrationController {
             @RequestParam String email,
             Model model) {
         
-        // Check if username already exists
         if (userRepository.findByUsername(username) != null) {
             model.addAttribute("error", "Username already exists");
             return "register";
         }
 
-        // Create new user with USER role
         AppUser newUser = new AppUser(
             username,
             passwordEncoder.encode(password),
